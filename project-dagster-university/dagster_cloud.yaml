@@ -1,0 +1,11 @@
+locations:
+  - location_name: dagster_university
+    code_source:
+      package_name: dagster_university
+  - resources: 
+    kafka_consumer_resource:
+      config:
+        bootstrap_servers: kafka:9092
+        group_id: my_consumer_group
+        topic_name: test_topic
+        

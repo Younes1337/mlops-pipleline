@@ -1,0 +1,19 @@
+version: '3.3'
+
+services:
+  jupyter:
+    image: jupyter-image
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./notebooks:/home/jovyan/work  # Mount a local directory to persist notebooks
+      - ./data:/home/jovyan/data       # Mount a local directory to provide data files
+      - ./scripts:/home/jovyan/scripts # Mount a local directory to persist Python scripts
+    environment:
+      - USER=jovyan  # Set the user inside the container
+    networks:
+      - test_network
+
+networks:
+  test_network:
+    driver: bridge

@@ -1,0 +1,17 @@
+dagster
+dagster-postgres
+numpy
+scipy
+pandas
+Faker==8.4.0  # Corrected version number
+mlflow
+scikit-learn
+pika
+boto3
+confluent-kafka
+setuptools
+datasets
+tokenizers
+transformers
+sentence_transformers
+confluent-kafka-python

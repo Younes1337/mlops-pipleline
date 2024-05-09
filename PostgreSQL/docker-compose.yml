@@ -1,0 +1,30 @@
+version: "3.3"  # Adjust if using a different version
+
+
+services:
+  postgres:
+    image: postgres:latest  # Or a specific version tag
+    networks:
+      - test_network  # Connect the postgres service to the test_network
+
+    # Configure port mapping
+    ports:
+      - "127.0.0.1:5432:5432"  # Map container port 5432 to host port 5432 (default)
+
+    # Environment variables for configuration (optional)
+    environment:
+      POSTGRES_USER: postgres  # Adjust username if needed
+      POSTGRES_PASSWORD: admin  # Replace with a strong password
+      POSTGRES_DB: mlflow_backend  # Optional: Pre-create a database
+
+    # Persistent data volume (optional)
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Map a volume for data persistence
+
+volumes:
+  postgres_data:  # Define the persistent data volume (optional)
+
+
+networks:
+  test_network:
+    driver: bridge

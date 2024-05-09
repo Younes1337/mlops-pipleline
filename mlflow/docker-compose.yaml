@@ -1,0 +1,31 @@
+version: '3.3'
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_DB: mlflow_backend
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "127.0.0.1:5432:5432"
+    networks:
+      - test_network
+
+  mlflow:
+    image: mlflow-image
+    ports:
+      - "127.0.0.1:5000:5000"
+    environment:
+      - MLFLOW_DEFAULT_ARTIFACT_ROOT=s3://backendstore/
+      - MLFLOW_BACKEND_STORE_URI=postgresql+psycopg2://postgres:admin@postgres:5432/mlflow_backend
+    env_file:
+      - .env  # Load environment variables from .env file
+    command: mlflow server --host 0.0.0.0 --port 5000
+    depends_on:
+      - postgres
+    networks:
+      - test_network
+
+networks:
+  test_network:
+    driver: bridge
